@@ -1,0 +1,29 @@
+{
+  "medecins": [
+    {
+      "numero": "12345",
+      "specialite": "Cardiologist",
+      "cabinet": "Paris"
+    },
+    {
+      "numero": "67890",
+      "specialite": "Neurologist",
+      "cabinet": "Lyon"
+    },
+    {
+      "numero": "67890",
+      "specialite": "any",
+      "cabinet": "tyon"
+    },
+    {
+      "numero": "836458",
+      "specialite": "any sps",
+      "cabinet": "tyon"
+    },
+    {
+      "numero": "987324",
+      "specialite": "abdor",
+      "cabinet": "stading"
+    }
+  ]
+}
