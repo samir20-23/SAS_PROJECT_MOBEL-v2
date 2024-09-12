@@ -1,82 +1,4 @@
-// const { log } = require('console');
-// const fs = require('fs');
-// const filejson = 'data.json';
-// let readline = require('readline');
-// let rl = readline.createInterface({
-//     input: process.stdin,
-//     output: process.stdout,
-// });
-
-// let askQuestion = (query, callback) => {
-//     rl.question(query, (answer) => {
-//         callback(answer);
-//     });
-// }
-
-// let Add = (first_name, last_name) => {
-//      // 
-   
-//      // 
-// //  
-// fs.readFile(filejson,'utf8',(err,data)=>{
  
-// if(err){
-// console.log(err);
-// }else{ 
-//  let dataread = JSON.parse(data); 
-//  let ob ={
-//     "id": dataread.length+1,
-//     "name" : first_name,
-//     "first name ": last_name
-//   }
-
-//   dataread.push(ob);
-//   let datawrit =JSON.stringify(dataread);
-// fs.writeFile(filejson,datawrit,(err)=>{
-// if(err){
-// console.log(err);
-
-// }else{
-// console.log("is done");
-// }
-// });
-// }
-// })
-// }
-
-// let Delete = (id) => {
-//     console.log(`delete ${id}`);
-// }
-
-// let startCalculator = () => {
-//     let first_name;
-//     let last_name;
-//     let id = 0;
-    
-//     askQuestion("Enter the letter (a, d): ", (letter) => {
-//         if (letter === "a") {
-//             askQuestion("Enter the first_name: ", (fn) => {
-//                 first_name = fn;
-//                 askQuestion("Enter the last_name: ", (ln) => {
-//                     last_name = ln;
-//                     Add(first_name, last_name);
-//                     rl.close();
-//                 });
-//             });
-//         } else if (letter === "d") {
-//             askQuestion("Enter the id: ", (idInput) => {
-//                 id = idInput;
-//                 Delete(id);
-//                 rl.close();
-//             });
-//         } else {
-//             console.log("Invalid option");
-//             rl.close();
-//         }
-//     });
-// };
-
-// startCalculator();
 
 let fs = require("fs");
 let readline = require("readline");
@@ -121,9 +43,24 @@ fs.writeFile('data.json', jsdata, (err) => {
 })
 //                                    read file
 }
-let Delete = (id)=>{
-console.log(id);
-}
+let Delete = (id) => {
+    fs.readFile('data.json','utf8',(err,data)=>{
+        if(err){
+    console.log("ERROR ⚠️⚠️⚠️⚠️⚠️⚠️ :"+err);
+        }else{
+            let readData = JSON.parse(data); 
+             let updatedData = readData.filter((item) => item.id !== parseInt(id));
+    let jsonData2 = JSON.stringify(updatedData);
+    fs.writeFile("data.json",jsonData2,(err)=>{
+    if(err){
+    console.log("errr:"+err);
+    }else{
+    console.log("DELETE is done");
+    }
+    })
+        }
+    })
+    }
 let start =async ()=>{
     let out1,  out2, out3 ;
     let id = 0 ;
@@ -134,9 +71,16 @@ let start =async ()=>{
         out3 = await ask("####sdd last name :#### :");
         add(out1,out2,out3);
     }
-    else if(litter == "delete"){
-id = await ask("enter the id :######## : ")
-Delete(id);
+    if (litter == "delete") {
+        id = await ask(" ################### enter id you need delete :")
+        if (id != 0) {
+            out4 = await ask("????????????????????????????? ARE YOU SURE ? (yes,no)");
+            if (out4 == "yes") {
+                Delete(id);
+            } else {
+                console.log("nice");
+            }
+        }
     }
     rl.close();
 }
